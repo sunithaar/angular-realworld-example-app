@@ -1,26 +1,27 @@
 trigger:
-  -main
+- main  # Remove the dash from `-main`
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
--task: nodeTool@0
-    inputs:
-      versionSpec: '18.x'
-      checkLatest: true
-displayname: 'Install Node.js'
--script: 
+- task: NodeTool@0  # Capital N
+  inputs:
+    versionSpec: '18.x'
+    checkLatest: true
+  displayName: 'Install Node.js'
+
+- script: |
     npm install --legacy-peer-deps
     npm install -g @angular/cli
     npm install --global yarn
-    yarn install 
-    ng build
-displayName: 'Install dependencies and build'
+    yarn install
+    ng build --configuration production
+  displayName: 'Install dependencies and build'
 
--task: PublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'dist/'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-displayName: 'Publish Artifacts'
+  displayName: 'Publish Artifacts'
