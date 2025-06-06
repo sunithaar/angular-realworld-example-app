@@ -1,11 +1,11 @@
 trigger:
-- main  # Remove the dash from `-main`
+- main  
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Default' #'ubuntu-latest'
 
 steps:
-- task: NodeTool@0  # Capital N
+- task: NodeTool@0  
   inputs:
     versionSpec: '18.x'
     checkLatest: true
